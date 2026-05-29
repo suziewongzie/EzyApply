@@ -1,0 +1,68 @@
+{
+  "entities": {
+    "OnboardingDraft": {
+      "title": "OnboardingDraft",
+      "description": "Draft progress of a user completing the corporate assessment onboarding form.",
+      "type": "object",
+      "properties": {
+        "profile": {
+          "type": "object",
+          "description": "The partially filled company profile fields."
+        },
+        "currentIndex": {
+          "type": "integer",
+          "description": "The index of the current step in the multi-step form."
+        },
+        "updatedAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The timestamp when this draft was last updated."
+        },
+        "userId": {
+          "type": "string",
+          "description": "The Firebase Authentication UID who owns this draft."
+        }
+      },
+      "required": ["profile", "currentIndex", "updatedAt", "userId"]
+    },
+    "ApplicationRecord": {
+      "title": "ApplicationRecord",
+      "description": "Underwriting sheet application and workspace details.",
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Readable Application ID (e.g., APP-123456)"
+        },
+        "profile": {
+          "type": "object",
+          "description": "The final submitted company profile configuration."
+        },
+        "folderId": {
+          "type": "string"
+        },
+        "spreadsheetId": {
+          "type": "string"
+        },
+        "submittedAt": {
+          "type": "string"
+        },
+        "status": {
+          "type": "string",
+          "enum": ["Submitted", "Processing", "Approved", "Declined"]
+        }
+      },
+      "required": ["id", "profile", "submittedAt", "status"]
+    }
+  },
+  "firestore": {
+    "/onboarding_drafts/{userId}": {
+      "schema": "OnboardingDraft",
+      "description": "Collection of onboarding drafts, segmented by authenticated user UID."
+    },
+    "/applications/{userId}": {
+      "schema": "ApplicationRecord",
+      "description": "Active submitted underwriting loan profile application records keyed by claimant's user UID."
+    }
+  }
+}

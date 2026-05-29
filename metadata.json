@@ -1,0 +1,6 @@
+{
+  "name": "Loan Application Processor",
+  "description": "A mobile-first application to register profiles, review document checklists, submit documents to Google Drive, and track applications in Google Sheets.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
